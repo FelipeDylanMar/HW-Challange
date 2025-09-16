@@ -12,7 +12,7 @@ export interface Lead {
   position: string;
   source: LeadSource;
   status: LeadStatus;
-  score: number; // 0-100
+  score: number;
   notes: string;
   createdAt: string;
   lastContact: string;
@@ -25,7 +25,7 @@ export interface Opportunity {
   leadId?: string;
   name: string;
   stage: OpportunityStage;
-  amount?: number; // Optional as per requirements
+  amount?: number;
   accountName: string;
   expectedCloseDate?: string;
   description?: string;
