@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Lead, Opportunity } from './types/crm';
+import { useState, useEffect } from 'react';
+import type { Lead, Opportunity } from './types/crm';
 import LeadsList from './components/LeadsList';
 import LeadDetailPanel from './components/LeadDetailPanel';
 import OpportunitiesList from './components/OpportunitiesList';

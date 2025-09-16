@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Lead, LeadStatus, LeadSource } from '../types/crm';
+import type { Lead, LeadStatus, LeadSource } from '../types/crm';
 
 interface LeadDetailPanelProps {
   lead: Lead | null;
@@ -49,7 +49,7 @@ const LeadDetailPanel: React.FC<LeadDetailPanelProps> = ({
   const handleSave = async () => {
     setError(null);
     
-
+    // Validação antes de salvar
     if (!validateEmail(editedLead.email)) {
       setEmailError('Formato de email inválido');
       return;
@@ -60,27 +60,27 @@ const LeadDetailPanel: React.FC<LeadDetailPanelProps> = ({
       return;
     }
 
-
+    // Store original lead for rollback
     const originalLead = { ...lead };
     
-
+    // Optimistic update - apply changes immediately
     onSave(editedLead);
     setIsEditing(false);
     setIsLoading(true);
     
     try {
-
+      // Simular latência
       await new Promise(resolve => setTimeout(resolve, 1200));
       
-
+      // Simular possível erro (15% de chance para demonstrar rollback)
       if (Math.random() < 0.15) {
         throw new Error('Falha na conexão. Alterações foram revertidas.');
       }
       
-
+      // Success - optimistic update was correct
       console.log('✅ Alterações salvas com sucesso');
     } catch (err) {
-
+      // Rollback - revert to original state
       onSave(originalLead);
       setEditedLead({ ...originalLead });
       setIsEditing(true);
@@ -116,7 +116,7 @@ const LeadDetailPanel: React.FC<LeadDetailPanelProps> = ({
 
   return (
     <>
-
+      {/* Backdrop */}
       {isOpen && (
         <div 
           className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity z-40"
@@ -124,13 +124,13 @@ const LeadDetailPanel: React.FC<LeadDetailPanelProps> = ({
         />
       )}
 
-
+      {/* Slide-over Panel */}
       <div className={`fixed inset-y-0 right-0 max-w-full flex z-50 transform transition-transform duration-300 ease-in-out ${
         isOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <div className="w-screen max-w-md">
           <div className="h-full flex flex-col bg-white shadow-xl">
-
+            {/* Header */}
             <div className="px-4 py-6 bg-gray-50 sm:px-6">
               <div className="flex items-center justify-between">
                 <h2 className="text-lg font-medium text-gray-900">
@@ -150,17 +150,17 @@ const LeadDetailPanel: React.FC<LeadDetailPanelProps> = ({
               </div>
             </div>
 
-
+            {/* Content */}
             <div className="flex-1 overflow-y-auto">
               <div className="px-4 py-6 sm:px-6">
-
+                {/* Error Message */}
                 {error && (
                   <div className="mb-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
                     {error}
                   </div>
                 )}
 
-
+                {/* Action Buttons */}
                 <div className="flex justify-between mb-6">
                   {!isEditing ? (
                     <button
@@ -216,9 +216,9 @@ const LeadDetailPanel: React.FC<LeadDetailPanelProps> = ({
                   )}
                 </div>
 
-
+                {/* Lead Information */}
                 <div className="space-y-6">
-
+                  {/* Basic Info */}
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 mb-4">Informações Básicas</h3>
                     <div className="grid grid-cols-1 gap-4">
@@ -304,7 +304,7 @@ const LeadDetailPanel: React.FC<LeadDetailPanelProps> = ({
                     </div>
                   </div>
 
-
+                  {/* Status and Metrics */}
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 mb-4">Status e Métricas</h3>
                     <div className="grid grid-cols-1 gap-4">
@@ -368,7 +368,7 @@ const LeadDetailPanel: React.FC<LeadDetailPanelProps> = ({
                     </div>
                   </div>
 
-
+                  {/* Notes */}
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 mb-4">Observações</h3>
                     {isEditing ? (
@@ -384,7 +384,7 @@ const LeadDetailPanel: React.FC<LeadDetailPanelProps> = ({
                     )}
                   </div>
 
-
+                  {/* Timestamps */}
                   <div>
                     <h3 className="text-lg font-medium text-gray-900 mb-4">Datas</h3>
                     <div className="grid grid-cols-1 gap-4">

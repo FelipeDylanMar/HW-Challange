@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Opportunity, OpportunityFilters, SortConfig } from '../types/crm';
+import type { Opportunity, OpportunityFilters, SortConfig } from '../types/crm';
 
 interface OpportunitiesListProps {
   opportunities: Opportunity[];
@@ -11,11 +11,9 @@ interface OpportunitiesListProps {
 const OpportunitiesList: React.FC<OpportunitiesListProps> = ({ 
   opportunities, 
   onOpportunitySelect, 
-  onOpportunityUpdate,
   onOpportunityDelete 
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [lastFailedAction, setLastFailedAction] = useState<(() => void) | null>(null);
@@ -73,7 +71,7 @@ const OpportunitiesList: React.FC<OpportunitiesListProps> = ({
   }, [sortConfig]);
 
   const filteredAndSortedOpportunities = useMemo(() => {
-    let filtered = opportunities.filter(opportunity => {
+    const filtered = opportunities.filter(opportunity => {
 
       if (searchTerm) {
         const searchLower = searchTerm.toLowerCase();
@@ -102,6 +100,10 @@ const OpportunitiesList: React.FC<OpportunitiesListProps> = ({
     filtered.sort((a, b) => {
       const aValue = a[sortConfig.field as keyof Opportunity];
       const bValue = b[sortConfig.field as keyof Opportunity];
+      
+      if (aValue == null && bValue == null) return 0;
+      if (aValue == null) return sortConfig.direction === 'asc' ? 1 : -1;
+      if (bValue == null) return sortConfig.direction === 'asc' ? -1 : 1;
       
       if (aValue < bValue) return sortConfig.direction === 'asc' ? -1 : 1;
       if (aValue > bValue) return sortConfig.direction === 'asc' ? 1 : -1;
@@ -210,36 +212,7 @@ const OpportunitiesList: React.FC<OpportunitiesListProps> = ({
     }
   };
 
-  const handleDelete = async (opportunityId: string) => {
-    if (!onOpportunityDelete) {
-      setError('Função de exclusão não disponível');
-      return;
-    }
 
-    if (!confirm('Tem certeza que deseja excluir esta oportunidade? Esta ação não pode ser desfeita.')) {
-      return;
-    }
-
-    try {
-      setDeletingId(opportunityId);
-      setError(null);
-
-      await new Promise(resolve => setTimeout(resolve, 800));
-      
-
-      if (Math.random() < 0.10) {
-        throw new Error('Erro ao excluir oportunidade. Verifique sua conexão e tente novamente.');
-      }
-      
-      onOpportunityDelete(opportunityId);
-      setSuccessMessage('Oportunidade excluída com sucesso!');
-      setTimeout(() => setSuccessMessage(null), 3000);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro desconhecido ao excluir oportunidade');
-    } finally {
-      setDeletingId(null);
-    }
-  };
 
   const getStageColor = (stage: string) => {
     const colors = {
@@ -343,6 +316,7 @@ const OpportunitiesList: React.FC<OpportunitiesListProps> = ({
             </div>
             <select
               value={filters.stage?.[0] || ''}
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               onChange={(e) => handleFilterChange({ ...filters, stage: e.target.value ? [e.target.value as any] : undefined })}
               disabled={isLoading}
               className="pl-10 pr-8 py-3 border border-gray-200/50 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500/50 bg-white/80 backdrop-blur-sm transition-all duration-200 appearance-none disabled:opacity-50 disabled:cursor-not-allowed"
