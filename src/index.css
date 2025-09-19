@@ -1,1 +1,41 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .table-responsive {
+    @apply overflow-x-auto;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 #f7fafc;
+  }
+  
+  .table-responsive::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .table-responsive::-webkit-scrollbar-track {
+    @apply bg-gray-100 rounded;
+  }
+  
+  .table-responsive::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded;
+  }
+  
+  .table-responsive::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+  
+  .actions-column {
+    position: sticky;
+    right: 0;
+    background: white;
+    z-index: 10;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .actions-column-header {
+    position: sticky;
+    right: 0;
+    background: #f9fafb;
+    z-index: 11;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1);
+  }
+}
