@@ -1,15 +1,100 @@
-# React + TypeScript + Vite
+# CRM Frontend Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Uma aplicação CRM moderna construída com React, TypeScript, Vite e Tailwind CSS, com suporte completo à internacionalização (i18n).
 
-Currently, two official plugins are available:
+## 🚀 Funcionalidades
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Interface moderna**: Design responsivo com Tailwind CSS
+- **Internacionalização**: Suporte completo a múltiplos idiomas (PT/EN)
+- **TypeScript**: Tipagem estática para maior confiabilidade
+- **Gestão de Leads**: Interface para gerenciamento de leads e oportunidades
+- **Componentes reutilizáveis**: Arquitetura modular e escalável
 
-## Expanding the ESLint configuration
+## 🐳 Execução com Docker (Recomendado)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+A forma mais simples de executar o projeto é usando Docker:
+
+```bash
+# Clone o repositório
+git clone <repository-url>
+cd HW-Challange
+
+# Execute com Docker Compose
+docker compose up --build -d
+```
+
+A aplicação estará disponível em: http://localhost:3000
+
+### Comandos Docker úteis:
+
+```bash
+# Parar os containers
+docker compose down
+
+# Ver logs
+docker compose logs -f
+
+# Rebuild completo
+docker compose down && docker compose up --build -d
+```
+
+## 💻 Desenvolvimento Local
+
+### Pré-requisitos
+
+- Node.js 18+ 
+- npm ou yarn
+
+### Instalação
+
+```bash
+# Instalar dependências
+npm install
+
+# Executar em modo desenvolvimento
+npm run dev
+
+# Build para produção
+npm run build
+
+# Preview do build
+npm run preview
+```
+
+## 🛠️ Tecnologias Utilizadas
+
+- **React 18** - Biblioteca para interfaces de usuário
+- **TypeScript** - Superset do JavaScript com tipagem estática
+- **Vite** - Build tool moderna e rápida
+- **Tailwind CSS** - Framework CSS utilitário
+- **React Router** - Roteamento para SPAs
+- **React i18next** - Internacionalização
+- **Lucide React** - Ícones modernos
+
+## 📁 Estrutura do Projeto
+
+```
+src/
+├── components/     # Componentes reutilizáveis
+├── pages/         # Páginas da aplicação
+├── hooks/         # Custom hooks
+├── contexts/      # Contextos React
+├── assets/        # Assets estáticos e dados mock
+├── locales/       # Arquivos de tradução
+└── types/         # Definições TypeScript
+```
+
+## 🌐 Internacionalização
+
+O projeto suporta múltiplos idiomas:
+- Português (pt)
+- Inglês (en)
+
+Para adicionar novos idiomas, edite os arquivos em `src/locales/`.
+
+## 🔧 Configuração do ESLint
+
+Se você está desenvolvendo uma aplicação para produção, recomendamos atualizar a configuração para habilitar regras de lint com verificação de tipos:
 
 ```js
 export default tseslint.config([
@@ -17,53 +102,31 @@ export default tseslint.config([
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
       ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
       ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
       ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
     ],
     languageOptions: {
       parserOptions: {
         project: ['./tsconfig.node.json', './tsconfig.app.json'],
         tsconfigRootDir: import.meta.dirname,
       },
-      // other options...
     },
   },
 ])
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📝 Scripts Disponíveis
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- `npm run dev` - Inicia o servidor de desenvolvimento
+- `npm run build` - Cria o build de produção
+- `npm run preview` - Visualiza o build de produção
+- `npm run lint` - Executa o ESLint
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## 🤝 Contribuição
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request

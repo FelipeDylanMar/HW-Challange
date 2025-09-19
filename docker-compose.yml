@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  crm-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: crm-frontend
+    ports:
+      - "3000:80"
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
+    networks:
+      - crm-network
+
+networks:
+  crm-network:
+    driver: bridge
