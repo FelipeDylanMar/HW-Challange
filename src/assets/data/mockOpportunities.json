@@ -1,0 +1,62 @@
+[
+  {
+    "id": "opp-001",
+    "leadId": "lead-003",
+    "name": "Implementação de Sistema ERP",
+    "stage": "proposal",
+    "amount": 150000,
+    "accountName": "Inovação Digital",
+    "expectedCloseDate": "2024-03-15",
+    "description": "Implementação completa de sistema ERP para gestão empresarial",
+    "createdAt": "2024-01-10T10:00:00Z",
+    "updatedAt": "2024-01-15T14:30:00Z"
+  },
+  {
+    "id": "opp-002",
+    "leadId": "lead-005",
+    "name": "Consultoria em Transformação Digital",
+    "stage": "negotiation",
+    "amount": 80000,
+    "accountName": "Crescimento Sustentável",
+    "expectedCloseDate": "2024-02-28",
+    "description": "Consultoria para modernização de processos e implementação de tecnologias digitais",
+    "createdAt": "2024-01-08T09:15:00Z",
+    "updatedAt": "2024-01-12T16:45:00Z"
+  },
+  {
+    "id": "opp-003",
+    "leadId": "lead-007",
+    "name": "Desenvolvimento de App Mobile",
+    "stage": "qualification",
+    "amount": 120000,
+    "accountName": "Varejo Inteligente",
+    "expectedCloseDate": "2024-04-10",
+    "description": "Desenvolvimento de aplicativo mobile para e-commerce",
+    "createdAt": "2024-01-12T11:20:00Z",
+    "updatedAt": "2024-01-18T13:10:00Z"
+  },
+  {
+    "id": "opp-004",
+    "leadId": "lead-009",
+    "name": "Migração para Cloud",
+    "stage": "prospecting",
+    "amount": 95000,
+    "accountName": "Logística Eficiente",
+    "expectedCloseDate": "2024-05-20",
+    "description": "Migração completa da infraestrutura para cloud computing",
+    "createdAt": "2024-01-15T08:30:00Z",
+    "updatedAt": "2024-01-20T10:15:00Z"
+  },
+  {
+    "id": "opp-005",
+    "leadId": "lead-010",
+    "name": "Automação de Processos",
+    "stage": "closed-won",
+    "amount": 200000,
+    "accountName": "Manufatura Avançada",
+    "expectedCloseDate": "2024-01-25",
+    "description": "Implementação de automação industrial e IoT",
+    "createdAt": "2024-01-05T14:45:00Z",
+    "updatedAt": "2024-01-25T17:20:00Z"
+  }
+]
